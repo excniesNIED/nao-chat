@@ -41,53 +41,6 @@
 		checkForVersionUpdates();
 	});
 </script>
-
-<div class="flex flex-col h-full justify-between space-y-3 text-sm mb-6">
-	<div class=" space-y-3 overflow-y-scroll max-h-[28rem] lg:max-h-full">
-		<div>
-			<div class=" mb-2.5 text-sm font-medium flex space-x-2 items-center">
-				<div>
-					{$WEBUI_NAME}
-					{$i18n.t('Version')}
-				</div>
-			</div>
-			<div class="flex w-full justify-between items-center">
-				<div class="flex flex-col text-xs text-gray-700 dark:text-gray-200">
-					<div class="flex gap-1">
-						<Tooltip content={WEBUI_BUILD_HASH}>
-							v{WEBUI_VERSION}
-						</Tooltip>
-
-						<a
-							href="https://github.com/open-webui/open-webui/releases/tag/v{version.latest}"
-							target="_blank"
-						>
-							{updateAvailable === null
-								? $i18n.t('Checking for updates...')
-								: updateAvailable
-									? `(v${version.latest} ${$i18n.t('available!')})`
-									: $i18n.t('(latest)')}
-						</a>
-					</div>
-
-					<button
-						class=" underline flex items-center space-x-1 text-xs text-gray-500 dark:text-gray-500"
-						on:click={() => {
-							showChangelog.set(true);
-						}}
-					>
-						<div>{$i18n.t("See what's new")}</div>
-					</button>
-				</div>
-
-				<button
-					class=" text-xs px-3 py-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-850 dark:hover:bg-gray-800 transition rounded-lg font-medium"
-					on:click={() => {
-						checkForVersionUpdates();
-					}}
-				>
-					{$i18n.t('Check for updates')}
-				</button>
 			</div>
 		</div>
 
@@ -107,67 +60,42 @@
 		<hr class=" border-gray-100 dark:border-gray-850" />
 
 		<div class="mt-2 text-xs text-gray-400 dark:text-gray-500">
-			Emoji graphics provided by
-			<a href="https://github.com/jdecked/twemoji" target="_blank">Twemoji</a>, licensed under
+			Emoji 图片由
+			<a href="https://github.com/jdecked/twemoji" target="_blank">Twemoji</a>提供, 许可证是
 			<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY 4.0</a>.
-		</div>
-
-		<div class="flex space-x-1">
-			<a href="https://discord.gg/5rJgQTnV4s" target="_blank">
-				<img
-					alt="Discord"
-					src="https://img.shields.io/badge/Discord-Open_WebUI-blue?logo=discord&logoColor=white"
-				/>
-			</a>
-
-			<a href="https://twitter.com/OpenWebUI" target="_blank">
-				<img
-					alt="X (formerly Twitter) Follow"
-					src="https://img.shields.io/twitter/follow/OpenWebUI"
-				/>
-			</a>
-
-			<a href="https://github.com/open-webui/open-webui" target="_blank">
-				<img
-					alt="Github Repo"
-					src="https://img.shields.io/github/stars/open-webui/open-webui?style=social&label=Star us on Github"
-				/>
-			</a>
 		</div>
 
 		<div>
 			<pre
 				class="text-xs text-gray-400 dark:text-gray-500">Copyright (c) {new Date().getFullYear()} <a
-					href="https://openwebui.com"
+					href="https://sdnuroboticsailab.github.io"
 					target="_blank"
-					class="underline">Open WebUI (Timothy Jaeryang Baek)</a
+					class="underline">NAO Chat（山东师范大学机器人实验室）</a
 				>
 All rights reserved.
+由 <a
+  					href="https://github.com/open-webui/open-webui"
+  					target="_blank"
+  					class="underline">Open WebUI </a
+                                                 				>修改.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
+如果满足以下条件，则允许以源代码和二进制形式（无论是否经过修改）
+重新分发和使用：
 
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer.
+1. 源代码的再分发必须保留上述版权声明、此条件列表和以下免责声明。
 
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution.
+2. 二进制形式的再分发必须在分发提供的文档和/或其他材料中复制上述
+版权声明、此条件列表和以下免责声明。
 
-3. Neither the name of the copyright holder nor the names of its
-   contributors may be used to endorse or promote products derived from
-   this software without specific prior written permission.
+3. 未经事先明确书面许可，不得使用版权保持器的名称或贡献者的名称来
+支持或推广从本软件衍生的产品。
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+本软件按“原样”提供，不附带任何明示或默示的担保，包括但不限于适销性
+担保、特定用途适用性担保及非侵权担保。在任何情况下，版权持有人或
+贡献者均不对任何直接、间接、附带、特殊、惩戒性或后果性损害（
+包括但不限于替代品或服务的采购、使用损失、数据损失或利润损失，或业务中断）
+承担责任，无论该等损害基于何种责任理论产生，无论是合同责任、严格责任
+或侵权行为(包括疏忽或其他原因)，即使已被告知可能发生此类损害。
 </pre>
 		</div>
 
