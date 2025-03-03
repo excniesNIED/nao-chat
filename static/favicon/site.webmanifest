@@ -1,6 +1,6 @@
 {
-  "name": "Open WebUI",
-  "short_name": "WebUI",
+  "name": "NAO Chat",
+  "short_name": "NAO Chat",
   "icons": [
     {
       "src": "/favicon/web-app-manifest-192x192.png",
