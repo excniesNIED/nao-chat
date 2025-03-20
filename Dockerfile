@@ -22,13 +22,13 @@ FROM --platform=$BUILDPLATFORM node:22-alpine3.20 AS build
 ARG BUILD_HASH
 WORKDIR /app
 
-# ÉèÖÃnpmÌÔ±¦¾µÏñÔ´£¨½öºËÐÄÅäÖÃ£©
+# ï¿½ï¿½ï¿½ï¿½npmï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½
 RUN npm config set registry https://registry.npmmirror.com && \
     npm config set cache /tmp/.npm --global
 
 COPY package.json package-lock.json ./
 
-# Í¨¹ý»·¾³±äÁ¿ÉèÖÃ¶þ½øÖÆ¾µÏñÔ´
+# Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½Æ¾ï¿½ï¿½ï¿½Ô´
 RUN PUPPETEER_DOWNLOAD_HOST="https://npmmirror.com/mirrors" \
     ELECTRON_MIRROR="https://npmmirror.com/mirrors/electron/" \
     SASS_BINARY_SITE="https://npmmirror.com/mirrors/node-sass" \
@@ -85,7 +85,7 @@ ENV HF_HOME="/app/backend/data/cache/embedding/models"
 #### Other models ##########################################################
 WORKDIR /app/backend
 ENV HOME=/root
-# ´´½¨ÓÃ»§ºÍ×é£¨·ÇrootÊ±£©
+# ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½é£¨ï¿½ï¿½rootÊ±ï¿½ï¿½
 RUN if [ $UID -ne 0 ]; then \
     if [ $GID -ne 0 ]; then \
     addgroup --gid $GID app; \
@@ -94,33 +94,33 @@ RUN if [ $UID -ne 0 ]; then \
     fi
 RUN mkdir -p $HOME/.cache/chroma
 RUN echo -n 00000000-0000-0000-0000-000000000000 > $HOME/.cache/chroma/telemetry_user_id
-# È·±£ÓÃ»§ÓÐ·ÃÎÊÈ¨ÏÞ
+# È·ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ð·ï¿½ï¿½ï¿½È¨ï¿½ï¿½
 RUN chown -R $UID:$GID /app $HOME
-# Ìæ»»ÎªÇå»ª¾µÏñÔ´£¨ÊÊÓÃÓÚDebian bookworm£©
+# ï¿½æ»»Îªï¿½å»ªï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Debian bookwormï¿½ï¿½
 RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free non-free-firmware" > /etc/apt/sources.list && \
     echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
     echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list
 
-# °²×°»ù´¡ÒÀÀµ
+# ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 RUN if [ "$USE_OLLAMA" = "true" ]; then \
     apt-get update && \
-    # °²×°ÒÀÀµ
+    # ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½
     apt-get install -y --no-install-recommends git build-essential pandoc netcat-openbsd curl \
     gcc python3-dev ffmpeg libsm6 libxext6 jq && \
-    # °²×°ollama
+    # ï¿½ï¿½×°ollama
     curl -fsSL https://ollama.com/install.sh | sh && \
     rm -rf /var/lib/apt/lists/*; \
     else \
     apt-get update && \
-    # °²×°ÒÀÀµ
+    # ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½
     apt-get install -y --no-install-recommends git build-essential pandoc gcc netcat-openbsd \
     curl jq python3-dev ffmpeg libsm6 libxext6 && \
     rm -rf /var/lib/apt/lists/*; \
     fi
-# °²×°PythonÒÀÀµ
+# ï¿½ï¿½×°Pythonï¿½ï¿½ï¿½ï¿½
 COPY --chown=$UID:$GID ./backend/requirements.txt ./requirements.txt
 RUN pip3 install uv && \
     if [ "$USE_CUDA" = "true" ]; then \
@@ -137,11 +137,11 @@ RUN pip3 install uv && \
     python -c "import os; import tiktoken; tiktoken.get_encoding(os.environ['TIKTOKEN_ENCODING_NAME'])"; \
     fi; \
     chown -R $UID:$GID /app/backend/data/
-# ¿½±´¹¹½¨ÎÄ¼þ
+# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 COPY --chown=$UID:$GID --from=build /app/build /app/build
 COPY --chown=$UID:$GID --from=build /app/CHANGELOG.md /app/CHANGELOG.md
 COPY --chown=$UID:$GID --from=build /app/package.json /app/package.json
-# ¿½±´ºó¶ËÎÄ¼þ
+# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 COPY --chown=$UID:$GID ./backend .
 EXPOSE 8080
 HEALTHCHECK CMD curl --silent --fail http://localhost:${PORT:-8080}/health | jq -ne 'input.status == true' || exit 1
